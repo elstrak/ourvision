@@ -9,7 +9,7 @@ import Footer from '../../components/Footer/Footer';
 import Services from '../../components/Services/Services';
 import './HomePage.css';  
 import Testimonials from '../../components/Testimonials/Testimonials';
-
+import FAQ from '../../components/FAQ/FAQ';
 const HomePage = () => {
   return (
     <div className="home-page">
@@ -21,6 +21,7 @@ const HomePage = () => {
       <Services />
       <Trends />
       <Testimonials />
+      <FAQ />
       <Footer />
     </div>
   );

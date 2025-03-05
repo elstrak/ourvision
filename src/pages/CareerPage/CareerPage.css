@@ -1,0 +1,216 @@
+.career-page {
+    background-color: var(--color-white);
+    min-height: 100vh;
+  }
+  
+  .career-hero {
+    background-color: var(--color-red);
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  
+  .career-hero-content {
+    width: 100%;
+    max-width: var(--container-width);
+    padding: 0 var(--spacing-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .career-logo-container {
+    background-color: var(--color-black);
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .career-logo {
+    width: 100%;
+    height: auto;
+    filter: invert(1) brightness(1.2);
+  }
+  
+  .career-content {
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .career-title {
+    font-family: Plain, sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-lg);
+    text-transform: lowercase;
+    letter-spacing: -0.025em;
+    text-align: center;
+  }
+  
+  .career-tabs {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+  }
+  
+  .career-tab {
+    background-color: var(--color-gray);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .career-tab.active {
+    background-color: var(--color-black);
+    color: var(--color-white);
+  }
+  
+  .career-tab:hover:not(.active) {
+    background-color: var(--color-light-gray);
+  }
+  
+  .career-jobs-container {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .career-job-group {
+    margin-bottom: var(--spacing-lg);
+  }
+  
+  .job-group-title {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-md);
+    text-transform: lowercase;
+    letter-spacing: -0.025em;
+    color: var(--color-black);
+  }
+  
+  .job-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+  
+  .job-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-gray);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .job-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .job-title {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-black);
+  }
+  
+  .job-meta {
+    display: flex;
+    gap: var(--spacing-md);
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .job-apply-btn {
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+  
+  .job-apply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(230, 54, 35, 0.3);
+  }
+  
+  .career-cta {
+    background-color: var(--color-gray);
+    padding: var(--spacing-lg);
+    border-radius: 12px;
+    text-align: center;
+  }
+  
+  .cta-title {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: var(--spacing-sm);
+    color: var(--color-black);
+  }
+  
+  .cta-text {
+    font-size: 1.1rem;
+    margin-bottom: var(--spacing-md);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .cta-button {
+    display: inline-block;
+    background-color: var(--color-red);
+    color: var(--color-white);
+    border: none;
+    padding: 12px 32px;
+    border-radius: 50px;
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(230, 54, 35, 0.3);
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .job-item {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: var(--spacing-md);
+    }
+    
+    .job-apply-btn {
+      align-self: flex-start;
+    }
+    
+    .job-meta {
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+  }

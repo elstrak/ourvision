@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import TrendsPage from './pages/TrendsPage/TrendsPage';
 import ContactPage from './pages/ContactPage/ContactPage';
 import BriefPage from './pages/BriefPage/BriefPage';
+import CareerPage from './pages/CareerPage/CareerPage';
 import CustomCursor from './components/CustomCursor/CustomCursor';
 import './App.css';
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/trends" element={<TrendsPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/brief" element={<BriefPage />} />
+        <Route path="/career" element={<CareerPage />} />
       </Routes>
     </Router>
   );

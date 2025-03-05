@@ -55,8 +55,9 @@ const Header = () => {
     { id: 1, text: 'кейсы', color: '#222222', textColor: '#FFFFFF', link: '/' },
     { id: 2, text: 'о нас', color: '#222222', textColor: '#FFFFFF', link: '/' },
     { id: 3, text: 'тренды', color: '#FF7F50', textColor: '#FFFFFF', link: '/trends' },
-    { id: 4, text: 'карьера', color: '#FF7F50', textColor: '#FFFFFF', link: '/' },
-    { id: 5, text: 'контакты', color: '#FFD700', textColor: '#FFFFFF', link: '/contact' }
+    { id: 4, text: 'карьера', color: '#FF7F50', textColor: '#FFFFFF', link: '/career' },
+    { id: 5, text: 'контакты', color: '#FFD700', textColor: '#FFFFFF', link: '/contact' },
+    { id: 6, text: 'бриф', color: '#FFD700', textColor: '#FFFFFF', link: '/brief' }
   ];
 
   return (
