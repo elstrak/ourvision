@@ -1,0 +1,294 @@
+.trends {
+    position: relative;
+    background-color: #B8C4B8; /* Светло-зеленый фон по умолчанию */
+    color: var(--color-black);
+    padding: var(--spacing-xl) 0;
+    transition: background-color 0.5s ease;
+    min-height: 100vh;
+  }
+  
+  .trends.scrolled {
+    background-color: #75ACDD; /* Голубой фон при прокрутке */
+  }
+  
+  .trends-header {
+    margin-bottom: var(--spacing-xl);
+    text-align: center;
+  }
+  
+  .trends-title {
+    font-family: Plain, sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: var(--spacing-md);
+    text-transform: lowercase;
+    letter-spacing: -0.025em;
+  }
+  
+  .trends-subtitle {
+    font-size: 1.25rem;
+    max-width: 700px;
+    margin: 0 auto;
+    opacity: 0.8;
+  }
+  
+  .trends-content {
+    display: flex;
+    gap: var(--spacing-xl);
+  }
+  
+  .trends-left {
+    flex: 0 0 40%;
+    position: sticky;
+    top: var(--spacing-xl);
+    align-self: flex-start;
+    height: fit-content;
+  }
+  
+  .trends-right {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+  }
+  
+  .trends-intro {
+    max-width: 100%;
+    position: relative;
+  }
+  
+  .trends-written-for {
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-sm);
+    text-transform: lowercase;
+    opacity: 0.8;
+  }
+  
+  .trends-brand {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-md);
+    text-transform: lowercase;
+    letter-spacing: -.025em;
+  }
+  
+  .trends-quote {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-lg);
+    text-transform: lowercase;
+    letter-spacing: -.025em;
+  }
+  
+  .trends-button {
+    display: inline-block;
+    padding: 12px 32px;
+    background-color: var(--color-black);
+    border: none;
+    border-radius: 50px;
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1.125rem;
+    text-transform: lowercase;
+    text-decoration: none;
+    color: var(--color-white);
+    transition: all 0.3s ease;
+  }
+  
+  .trends-button:hover {
+    background-color: #F7BFD9; /* Розовый при наведении */
+    color: var(--color-black);
+    transform: translateY(-2px);
+  }
+  
+  /* Стили для элементов трендов */
+  .trend-item {
+    display: flex;
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-md);
+    align-items: center;
+    padding: 1rem;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .trend-item.hovered {
+    background-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Геометрические формы */
+  .trend-shape {
+    flex: 0 0 100px;
+    height: 100px;
+    min-width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  
+  .trend-item.hovered .trend-shape {
+    transform: rotate(5deg);
+  }
+  
+  .trend-shape-circle {
+    border-radius: 50%;
+  }
+  
+  .trend-shape-hexagon {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  }
+  
+  .trend-shape-pentagon {
+    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
+  }
+  
+  .trend-shape-square {
+    border-radius: 8px;
+  }
+  
+  .trend-circle-container {
+    width: 85%;
+    height: 85%;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    margin: auto;
+  }
+  
+  .trend-circle {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: var(--color-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    will-change: transform;
+  }
+  
+  .trend-text-circle {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    will-change: transform, filter;
+  }
+  
+  .trend-text-circle svg {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .trend-text-circle text {
+    font-size: 3.8px; /* Slightly smaller to fit more text */
+    font-weight: 700;
+    fill: var(--color-black);
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+  }
+  
+  .trend-text-circle-1 {
+    width: 90%;
+    height: 90%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  
+  .trend-text-circle-2 {
+    width: 70%;
+    height: 70%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  
+  .trend-text-circle-3 {
+    width: 50%;
+    height: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+  }
+  
+  .trend-text-circle textPath {
+    dominant-baseline: middle;
+    text-anchor: middle;
+  }
+  
+  .trend-content {
+    flex: 1;
+  }
+  
+  .trend-date {
+    font-size: 0.875rem;
+    color: rgba(0, 0, 0, 0.6);
+    margin-bottom: 0.25rem;
+  }
+  
+  .trend-title {
+    font-family: Plain, sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.2;
+    text-transform: lowercase;
+    letter-spacing: -0.025em;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 992px) {
+    .trends-content {
+      flex-direction: column;
+    }
+    
+    .trends-left {
+      position: relative;
+      top: 0;
+      flex: 0 0 auto;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .trends-right {
+      flex: 0 0 auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .trend-item {
+      flex-direction: column;
+      text-align: center;
+    }
+    
+    .trend-shape {
+      margin-bottom: var(--spacing-md);
+    }
+    
+    .trends-title {
+      font-size: 2.5rem;
+    }
+    
+    .trends-quote {
+      font-size: 1.5rem;
+    }
+  }
+  
+  /* Ensure the hover effect works well with the square shape */
+  .trend-item.hovered .trend-shape {
+    transform: rotate(5deg);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  }

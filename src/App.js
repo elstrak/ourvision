@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './styles/global.css';
+import HomePage from './pages/HomePage/HomePage';
+import TrendsPage from './pages/TrendsPage/TrendsPage';
+import ContactPage from './pages/ContactPage/ContactPage';
+import BriefPage from './pages/BriefPage/BriefPage';
+import CustomCursor from './components/CustomCursor/CustomCursor';
 import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CustomCursor />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/trends" element={<TrendsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/brief" element={<BriefPage />} />
+      </Routes>
+    </Router>
   );
 }
 

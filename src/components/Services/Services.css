@@ -1,0 +1,244 @@
+.services {
+  position: relative;
+  transition: background-color 0.5s ease;
+  color: var(--color-black);
+  padding: 0;
+  overflow: hidden;
+}
+
+.services.scrolled {
+  background-color: #75ACDD;
+  color: var(--color-white);
+}
+
+.services-image-container {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.services-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.services-content {
+  display: flex;
+  padding: var(--spacing-xl) 0;
+  gap: var(--spacing-xl);
+}
+
+.services-left {
+  flex: 0 0 40%;
+  position: relative;
+}
+
+.services-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.services-title {
+  font-family: Plain, sans-serif;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: -.025em;
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 0;
+}
+
+.services-button {
+  display: inline-block;
+  padding: 12px 32px;
+  background-color: #F7BFD9;
+  border: none;
+  border-radius: 50px;
+  font-family: Plain, sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: var(--color-black);
+  transition: all 0.3s ease;
+  align-self: flex-start;
+  margin-top: var(--spacing-sm);
+}
+
+.services-button:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  transform: translateY(-2px);
+}
+
+.services-right {
+  flex: 0 0 50%;
+}
+
+.services-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.service-item {
+  border-bottom: 1px solid currentColor;
+  transition: all 0.3s ease;
+}
+
+.service-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md) 0;
+  cursor: pointer;
+}
+
+.service-title {
+  font-family: Plain, sans-serif;
+  font-weight: 700;
+  text-transform: lowercase;
+  letter-spacing: -.025em;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+.service-toggle {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.service-details {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease, padding 0.5s ease;
+  padding: 0 var(--spacing-md);
+}
+
+.service-item.active .service-details {
+  max-height: 500px;
+  padding: var(--spacing-md);
+  padding-top: 0;
+  padding-bottom: var(--spacing-lg);
+}
+
+.service-description {
+  font-size: 1.125rem;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.4;
+}
+
+.service-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+.service-tag {
+  display: inline-block;
+  padding: 6px 12px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.services.scrolled .service-tag {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 1200px) {
+  .services-content {
+    flex-direction: column;
+    gap: var(--spacing-lg);
+  }
+  
+  .services-left, .services-right {
+    flex: 0 0 100%;
+  }
+  
+  .services-title {
+    font-size: 1.75rem;
+  }
+  
+  .service-title {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .services-image-container {
+    height: 50vh;
+  }
+  
+  .services-title {
+    font-size: 1.5rem;
+  }
+  
+  .service-title {
+    font-size: 1.5rem;
+  }
+  
+  .service-description {
+    font-size: 1rem;
+  }
+}
+
+.services-section {
+  padding: 60px 0;
+  background-color: #FFCC00; /* Желтый фон как на скриншоте */
+}
+
+.services-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.services-title {
+  font-family: Plain, sans-serif;
+  font-weight: 700;
+  font-size: 1.75rem;
+  margin-bottom: 30px;
+  color: #111111;
+}
+
+.services-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.service-tag {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 30px;
+  border: 2px solid #111111;
+  border-radius: 50px;
+  font-family: Plain, sans-serif;
+  font-weight: 500;
+  font-size: 1.125rem;
+  color: #111111;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.service-tag:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .services-tags {
+    gap: 15px;
+  }
+  
+  .service-tag {
+    padding: 12px 20px;
+    font-size: 1rem;
+  }
+}

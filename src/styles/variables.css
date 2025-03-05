@@ -1,0 +1,25 @@
+:root {
+    /* Цветовая палитра */
+    --color-white: #FFFFFF;
+    --color-red: #E63623;
+    --color-black: #101010;
+    --color-gray: #F5F5F5;
+    --color-light-gray: #E0E0E0;
+    
+    /* Типографика */
+    --font-primary: 'Helvetica Neue', 'Arial', sans-serif;
+    --font-secondary: 'Roboto', sans-serif;
+    
+    /* Размеры */
+    --header-height: 80px;
+    --container-width: 1200px;
+    --spacing-xs: 8px;
+    --spacing-sm: 16px;
+    --spacing-md: 24px;
+    --spacing-lg: 48px;
+    --spacing-xl: 80px;
+    
+    /* Анимации */
+    --transition-fast: 0.3s ease;
+    --transition-medium: 0.5s ease;
+  }

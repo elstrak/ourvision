@@ -1,0 +1,141 @@
+.portfolio {
+    background-color: var(--color-white);
+    padding: var(--spacing-xl) 0;
+  }
+  
+  .showreel {
+    margin-bottom: var(--spacing-xl);
+  }
+  
+  .showreel-image {
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: var(--spacing-md);
+  }
+  
+  .showreel-image img {
+    width: 100%;
+    display: block;
+  }
+  
+  .showreel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1;
+    transition: var(--transition-medium);
+  }
+  
+  .showreel-image:hover .showreel-overlay {
+    background: rgba(0, 0, 0, 0.5);
+  }
+  
+  .play-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    background-color: var(--color-red);
+    color: white;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: var(--transition-fast);
+  }
+  
+  .play-button:hover {
+    background-color: #d42e1c;
+  }
+  
+  .play-icon {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .showreel-title {
+    font-size: 3rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--color-black);
+  }
+  
+  .awards-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+  
+  .award-card {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-md);
+    background-color: var(--color-black);
+    color: var(--color-white);
+    border-radius: 8px;
+  }
+  
+  .award-icon {
+    margin-right: var(--spacing-md);
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+  
+  .award-icon img {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .award-content {
+    flex: 1;
+  }
+  
+  .award-content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
+  }
+  
+  .award-content p {
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+  }
+  
+  .award-link {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transition: var(--transition-fast);
+  }
+  
+  .award-link img {
+    width: 16px;
+    height: 16px;
+  }
+  
+  .award-link:hover {
+    background-color: var(--color-blue);
+  }
+  
+  @media (max-width: 768px) {
+    .awards-section {
+      grid-template-columns: 1fr;
+    }
+    
+    .showreel-title {
+      font-size: 2rem;
+    }
+  }
