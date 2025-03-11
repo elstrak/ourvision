@@ -39,12 +39,21 @@ app.use('/api/projects', testimonialRoutes);
 app.use('/api/jobs', jobs);
 app.use('/api/team', teamRoutes);
 
+
 // Обслуживание админ-панели в продакшене
 if (process.env.NODE_ENV === 'production') {
   app.use('/admin', express.static(path.join(__dirname, 'admin/build')));
   
   app.get('/admin/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin/build', 'index.html'));
+  });
+
+  // Статические файлы
+  app.use(express.static(path.join(__dirname, './build')));
+
+  // Маршрут для всех остальных запросов
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, './build', 'index.html'));
   });
 }
 
