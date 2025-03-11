@@ -15,7 +15,7 @@ const Footer = () => {
               <img src={logo} alt="Our Vision Logo" className="footer-logo-img" />
             </div>
             <p className="footer-description">
-              Создаем уникальные digital-решения для вашего бизнеса с 2020 года.
+              Создаем уникальные digital-решения для вашего бизнеса с 2022 года.
               Наша команда профессионалов поможет вам выделиться среди конкурентов.
             </p>
           </div>
@@ -34,13 +34,13 @@ const Footer = () => {
             <h3 className="footer-title">Контакты</h3>
             <ul className="footer-contact">
               <li>
-                <a href="mailto:info@ourvision.ru" className="footer-contact-link email">
-                  info@ourvision.ru
+                <a href="mailto:offer@ourvision.pro" className="footer-contact-link email">
+                offer@ourvision.pro
                 </a>
               </li>
               <li>
-                <a href="tel:+79991234567" className="footer-contact-link phone">
-                  +7 (999) 123-45-67
+                <a href="tel:+79195781266" className="footer-contact-link phone">
+                8-919-578-12-66
                 </a>
               </li>
               <li>
@@ -54,9 +54,9 @@ const Footer = () => {
           <div className="footer-section">
             <h3 className="footer-title">Социальные сети</h3>
             <div className="footer-social">
-              <a href="https://vk.com/" target="_blank" rel="noopener noreferrer" className="social-link">VK</a>
-              <a href="https://t.me/" target="_blank" rel="noopener noreferrer" className="social-link">Telegram</a>
-              <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" className="social-link">YouTube</a>
+              <a href="https://vk.com/ourvisionnow" target="_blank" rel="noopener noreferrer" className="social-link">VK</a>
+              <a href="https://t.me/ourvisionpro" target="_blank" rel="noopener noreferrer" className="social-link">Telegram</a>
+              <a href="https://www.instagram.com/ourvision.pro" target="_blank" rel="noopener noreferrer" className="social-link">Insta</a>
             </div>
           </div>
         </div>

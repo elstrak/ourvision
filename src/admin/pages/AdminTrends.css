@@ -1,0 +1,50 @@
+/* src/admin/pages/AdminTrends.css */
+.admin-page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .admin-page-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .admin-page-header p {
+    color: #666;
+    font-size: 1rem;
+  }
+  
+  .admin-tabs {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 2rem;
+  }
+  
+  .admin-tab {
+    padding: 0.75rem 1.5rem;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .admin-tab.active {
+    color: #007bff;
+    font-weight: 500;
+  }
+  
+  .admin-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #007bff;
+  }
+  
+  .admin-tab:hover {
+    background-color: #f8f9fa;
+  }

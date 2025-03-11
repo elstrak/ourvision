@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './About.css';
 import aboutVideo from '../../assets/videos/about.mp4';
+import { Link } from 'react-router-dom';
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -36,7 +37,7 @@ const About = () => {
       <div className="container">
         <h2 className="about-title">мы делаем<br />бренды человечнее.</h2>
         
-        <div className="about-content">
+        <div className="abouthome-content">
           <div className="about-video-container">
             <video 
               className="about-video"
@@ -49,15 +50,15 @@ const About = () => {
           </div>
           
           <div className="about-text-container">
-            <div className="about-text-wrapper">
+            <div className="abouthome-text-wrapper">
               <p className="about-text">
-                мы — агентство социальных медиа, которое превращает
+                мы — smm-агентство, которое превращает
               </p>
               <p className="about-text">
-                бренды в социальные иконы. сочетая данные, креативность
+                бренды в социальные иконы.
               </p>
               <p className="about-text">
-                и стратегию, мы создаем прочные связи и стимулируем
+               мы создаем прочные связи и стимулируем
               </p>
               <p className="about-text">
                 вовлеченность. наш подход основан на глубоком понимании
@@ -67,7 +68,7 @@ const About = () => {
               </p>
             </div>
             
-            <a href="#more-about" className="about-button">о нас</a>
+            <Link to="/about" className="about-button">о нас</Link>
           </div>
         </div>
       </div>

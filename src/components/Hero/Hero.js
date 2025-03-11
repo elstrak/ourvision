@@ -88,7 +88,7 @@ const Hero = () => {
               <path id="curve1" d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
               <text>
                 <textPath xlinkHref="#curve1">
-                  • OURVISION • CREATIVE AGENCY • SOCIAL MEDIA • CONTENT • STRATEGY • PRODUCTION
+                  • OURVISION • CREATIVE AGENCY • SOCIAL MEDIA • CONTENT • STRATEGY • PRODUCTION • OURVISION • CREATIVE AGENCY • SOCIAL MEDIA • CONTENT • STRATEGY • PRODUCTION
                 </textPath>
               </text>
             </svg>
@@ -99,7 +99,7 @@ const Hero = () => {
               <path id="curve2" d="M 50, 50 m -30, 0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0" fill="transparent" />
               <text>
                 <textPath xlinkHref="#curve2">
-                  • DESIGN • PHOTO • VIDEO • ANIMATION • COPYWRITING • PRODUCTION
+                  • DESIGN • PHOTO • VIDEO • ANIMATION • COPYWRITING • PRODUCTION • DESIGN • PHOTO • VIDEO • ANIMATION • COPYWRITING • PRODUCTION
                 </textPath>
               </text>
             </svg>
@@ -110,7 +110,7 @@ const Hero = () => {
               <path id="curve3" d="M 50, 50 m -20, 0 a 20,20 0 1,1 40,0 a 20,20 0 1,1 -40,0" fill="transparent" />
               <text>
                 <textPath xlinkHref="#curve3">
-                  • SINCE 2023 • MOSCOW • SAINT PETERSBURG
+                  • SINCE 2022 • KAMCHATKA • PETROPAVLOVSK-KAMCHATSKY
                 </textPath>
               </text>
             </svg>

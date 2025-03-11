@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './FAQ.css';
-import videoBackground from '../../assets/videos/about.mp4'; // Замените на путь к вашему видео из assets
+import videoBackground from '../../assets/videos/faq.mp4'; // Замените на путь к вашему видео из assets
 
 const FAQ = () => {
   const [activeQuestion, setActiveQuestion] = useState(null);

@@ -4,6 +4,7 @@ import './ContactPage.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 import contactImage from '../../assets/images/contactimage.jpg'; // Make sure to add this image to your assets
+import contactImage2 from '../../assets/images/contactimage2.jpg'; // Make sure to add this image to your assets
 
 const ContactPage = () => {
   return (
@@ -25,15 +26,25 @@ const ContactPage = () => {
           <div className="contact-page-bottom-info">
             <div className="contact-info-column">
               <div className="contact-info-section">
-                <h3 className="contact-info-title">Основатель</h3>
+                <h3 className="contact-info-title">Основатели</h3>
                 <div className="contact-info-content">
                   <div className="contact-image-container">
                     <img src={contactImage} alt="Founder" className="contact-image" />
                   </div>
                   <p className="contact-name">Балбеков Виктор Романович</p>
                 </div>
+                <div className="contact-info-content">
+                  <div className="contact-image-container">
+                    <img src={contactImage2} alt="Founder" className="contact-image" />
+                  </div>
+                  <p className="contact-name">Пономарёв Иван Алексеевич</p>
+                </div>
               </div>
             </div>
+
+            
+
+            
             
             <div className="contact-info-column">
               <div className="contact-info-section">

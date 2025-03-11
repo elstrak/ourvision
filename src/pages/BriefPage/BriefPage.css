@@ -350,7 +350,7 @@
   }
   
   /* Нижняя часть формы */
-  .form-footer {
+  .form-footer-brief {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -466,7 +466,7 @@
   
   /* Адаптивность */
   @media (max-width: 1200px) {
-    .form-footer {
+    .form-footer-brief {
       flex-wrap: wrap;
     }
     
@@ -482,7 +482,7 @@
   }
   
   @media (max-width: 768px) {
-    .form-footer {
+    .form-footer-brief {
       flex-direction: column;
       align-items: flex-start;
       gap: 1.5rem;

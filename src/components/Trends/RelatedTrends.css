@@ -1,0 +1,92 @@
+/* src/components/Trends/RelatedTrends.css */
+.related-trends {
+    margin-top: 20px;
+  }
+  
+  .related-trends-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  
+  .related-trend-card {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+  }
+  
+  .related-trend-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+  
+  .related-trend-image {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+  }
+  
+  .related-trend-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  
+  .related-trend-card:hover .related-trend-image img {
+    transform: scale(1.05);
+  }
+  
+  .related-trend-content {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .related-trend-category {
+    display: inline-block;
+    background-color: #f0f5ff;
+    color: #1890ff;
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-transform: lowercase;
+  }
+  
+  .related-trend-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+    color: #333;
+  }
+  
+  .related-trend-description {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+  }
+  
+  /* Адаптивность */
+  @media (max-width: 768px) {
+    .related-trends-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .related-trends-grid {
+      grid-template-columns: 1fr;
+    }
+  }

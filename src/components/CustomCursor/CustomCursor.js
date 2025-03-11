@@ -153,7 +153,7 @@ const CustomCursor = () => {
 
   return (
     <div ref={cursorRef} className={getCursorClass()}>
-      {isHovering && hoverType === 'hero-title' && <span className="cursor-text">с 2020</span>}
+      {isHovering && hoverType === 'hero-title' && <span className="cursor-text">с 2022</span>}
       {isHovering && hoverType === 'article' && <span className="cursor-text">читать</span>}
       {isHovering && hoverType === 'email' && <span className="cursor-text">написать</span>}
       {isHovering && hoverType === 'phone' && <span className="cursor-text">позвонить</span>}

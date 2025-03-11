@@ -54,7 +54,7 @@
 .services-button {
   display: inline-block;
   padding: 12px 32px;
-  background-color: #F7BFD9;
+  background-color: #00A13A;
   border: none;
   border-radius: 50px;
   font-family: Plain, sans-serif;
@@ -236,5 +236,27 @@
   .service-tag {
     padding: 12px 20px;
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .service-card {
+    padding: 15px;
+  }
+  
+  .service-title {
+    font-size: 18px;
   }
 }

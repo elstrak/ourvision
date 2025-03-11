@@ -1,0 +1,13 @@
+/* src/admin/pages/AdminStats.css */
+.admin-page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .admin-page-header h2 {
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .admin-page-header p {
+    color: #666;
+  }

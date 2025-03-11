@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Services.css';
 import showreelImage from '../../assets/images/coffeepic.png';
+import { Link } from 'react-router-dom';
 
 const Services = () => {
   const [activeService, setActiveService] = useState(null);
@@ -78,12 +79,10 @@ const Services = () => {
           <div className="services-left">
             <h2 className="services-title">
               полный спектр услуг в сфере<br />
-              социальных сетей, отточенные<br />
-              стратегии работы и эффективные решения<br />
-              для ведущих брендов. изучите наши<br />
+              социальных сетей. изучите наши<br />
               услуги и узнайте больше.
             </h2>
-            <a href="#what-we-do" className="services-button">что мы делаем</a>
+            <Link to="/projects" className="services-button">что мы делаем</Link>
           </div>
           
           <div className="services-right">

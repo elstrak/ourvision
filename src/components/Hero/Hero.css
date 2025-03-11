@@ -357,3 +357,36 @@
       font-size: 1rem;
     }
   }
+
+  @media screen and (max-width: 992px) {
+    .hero-section {
+      flex-direction: column;
+    }
+    
+    .hero-content, .hero-image {
+      width: 100%;
+    }
+    
+    .hero-image {
+      margin-top: 30px;
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .hero-section {
+      padding: 40px 15px;
+    }
+    
+    .hero-title {
+      font-size: 28px;
+    }
+    
+    .hero-subtitle {
+      font-size: 16px;
+    }
+    
+    .hero-cta {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+  }

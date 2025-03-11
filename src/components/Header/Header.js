@@ -52,12 +52,12 @@ const Header = () => {
 
   // Меню навигации
   const menuItems = [
-    { id: 1, text: 'кейсы', color: '#222222', textColor: '#FFFFFF', link: '/' },
-    { id: 2, text: 'о нас', color: '#222222', textColor: '#FFFFFF', link: '/' },
-    { id: 3, text: 'тренды', color: '#FF7F50', textColor: '#FFFFFF', link: '/trends' },
-    { id: 4, text: 'карьера', color: '#FF7F50', textColor: '#FFFFFF', link: '/career' },
-    { id: 5, text: 'контакты', color: '#FFD700', textColor: '#FFFFFF', link: '/contact' },
-    { id: 6, text: 'бриф', color: '#FFD700', textColor: '#FFFFFF', link: '/brief' }
+    { id: 1, text: 'кейсы', color: '#222222', textColor: '#FFFFFF', link: '/projects' },
+    { id: 2, text: 'о нас', color: '#222222', textColor: '#FFFFFF', link: '/about' },
+    { id: 3, text: 'тренды', color: '#00A13A', textColor: '#BLACK', link: '/trends' },
+    { id: 4, text: 'карьера', color: '#00A13A', textColor: '#BLACK', link: '/career' },
+    { id: 5, text: 'контакты', color: '#75ACDD', textColor: '#BLACK', link: '/contact' },
+    { id: 6, text: 'бриф', color: '#75ACDD', textColor: '#BLACK', link: '/brief' }
   ];
 
   return (

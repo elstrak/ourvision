@@ -1,0 +1,535 @@
+/* src/admin/components/projects/ProjectForm.css */
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .admin-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  .admin-form-group label {
+    font-weight: 500;
+    color: #333;
+  }
+  
+  .admin-form input[type="text"],
+  .admin-form input[type="date"],
+  .admin-form select,
+  .admin-form textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+  }
+  
+  .admin-form-error {
+    border-color: #ff4d4f !important;
+  }
+  
+  .admin-form-error-text {
+    color: #ff4d4f;
+    font-size: 0.8rem;
+    margin-top: 4px;
+  }
+  
+  .admin-form-checkbox {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .admin-form-checkbox input {
+    margin: 0;
+  }
+  
+  .admin-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .admin-image-preview {
+    margin-top: 10px;
+    max-width: 300px;
+  }
+  
+  .admin-image-preview img {
+    width: 100%;
+    border-radius: 4px;
+  }
+  
+  .admin-image-input-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .admin-image-input-group input {
+    flex: 1;
+  }
+  
+  .admin-gallery-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .admin-gallery-item {
+    position: relative;
+  }
+  
+  .admin-gallery-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+  
+  .admin-gallery-item .admin-btn-delete {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 2px 5px;
+    font-size: 0.8rem;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+  }
+
+  .project-form {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    max-height: 85vh; /* Ограничиваем высоту формы */
+    overflow-y: auto; /* Добавляем вертикальную прокрутку */
+    position: relative; /* Для правильного позиционирования */
+  }
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.form-section {
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.1);
+  outline: none;
+}
+
+.form-control.error {
+  border-color: #ff4d4f;
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+.char-count {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+  margin-top: 5px;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+}
+
+.input-group .form-control {
+  flex: 1;
+}
+
+.btn {
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #4a6cf7;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #3a5ce5;
+}
+
+.btn-primary:disabled {
+  background-color: #a0b0f8;
+  cursor: not-allowed;
+}
+
+.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background-color: #e0e0e0;
+}
+
+.btn-add {
+  background-color: #4a6cf7;
+  color: white;
+  padding: 10px 16px;
+}
+
+.btn-add:hover {
+  background-color: #3a5ce5;
+}
+
+.btn-remove {
+  background-color: transparent;
+  color: #ff4d4f;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: background-color 0.2s;
+}
+
+.btn-remove:hover {
+  background-color: rgba(255, 255, 255, 1);
+  color: #ff7875;
+}
+
+.image-preview {
+  margin-top: 10px;
+  border-radius: 4px;
+  overflow: hidden;
+  max-width: 300px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.image-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.form-checkbox input {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+}
+
+.form-checkbox label {
+  margin-bottom: 0;
+  cursor: pointer;
+}
+
+.form-help {
+  font-size: 12px;
+  color: #666;
+  margin-top: 5px;
+}
+
+.video-upload {
+  margin-bottom: 15px;
+}
+
+.upload-progress {
+  margin-top: 10px;
+}
+
+.progress-bar {
+  height: 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 5px;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: #4a6cf7;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: #666;
+  text-align: right;
+}
+
+.videos-list {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.video-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  position: relative;
+  border: 1px solid #eee;
+}
+
+.video-preview {
+  width: 120px;
+  height: 120px;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.video-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.video-placeholder {
+  color: #999;
+  font-size: 2rem;
+}
+
+.video-info {
+  flex: 1;
+}
+
+.video-name {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: #333;
+  word-break: break-all;
+}
+
+.video-size {
+  font-size: 12px;
+  color: #666;
+}
+
+.video-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-preview {
+  background-color: #4a6cf7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 5px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.btn-preview:hover {
+  background-color: #3a5ce5;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #e0e0e0;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .project-form {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 576px) {
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .gallery-grid {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  }
+  
+  .video-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .video-preview {
+    width: 100%;
+    height: 120px;
+  }
+  
+  .btn-remove {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+/* Стили для модального окна предпросмотра видео */
+.video-preview-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.video-preview-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.video-preview-close {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.video-preview-player {
+  max-width: 100%;
+  max-height: 80vh;
+  object-fit: contain;
+  background-color: black;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .video-preview-close {
+    top: -30px;
+    right: 0;
+  }
+}
+
+.form-group select[multiple] {
+  height: auto;
+  min-height: 120px;
+}
+
+.form-group select[multiple] option {
+  padding: 8px;
+  margin-bottom: 2px;
+}
+
+.form-group select[multiple] option:checked {
+  background-color: #007bff;
+  color: white;
+}
+
+.form-group select[multiple] option:hover {
+  background-color: #f8f9fa;
+}

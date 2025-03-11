@@ -79,9 +79,64 @@ const BriefPage = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Здесь будет логика отправки формы на сервер
-    alert('Заявка отправлена!');
+    
+    // Функция для сохранения заявки
+    const saveBrief = (fileData = null) => {
+      // Создаем объект заявки
+      const briefData = {
+        id: Date.now().toString(),
+        date: new Date().toISOString(),
+        status: 'new', // Статус: 'new', 'in-progress', 'completed'
+        services: formData.services,
+        otherService: formData.otherService,
+        companyName: formData.companyName,
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        description: formData.description,
+        contactMethod: formData.contactMethod,
+        telegramUsername: formData.telegramUsername,
+        fileName: formData.file ? formData.file.name : null,
+        fileType: formData.file ? formData.file.type : null,
+        fileData: fileData // Base64 данные файла
+      };
+      
+      // Сохраняем в localStorage
+      const existingBriefs = JSON.parse(localStorage.getItem('briefs') || '[]');
+      existingBriefs.push(briefData);
+      localStorage.setItem('briefs', JSON.stringify(existingBriefs));
+      
+      // Сброс формы
+      setFormData({
+        services: [],
+        otherService: '',
+        companyName: '',
+        name: '',
+        phone: '',
+        email: '',
+        description: '',
+        contactMethod: '',
+        telegramUsername: '',
+        file: null
+      });
+      
+      // Уведомление пользователя
+      alert('Заявка отправлена! Наш менеджер свяжется с вами в ближайшее время.');
+    };
+    
+    // Если есть файл, конвертируем его в Base64
+    if (formData.file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        // Получаем Base64 строку (без метаданных)
+        const base64String = reader.result.split(',')[1];
+        saveBrief(base64String);
+      };
+      reader.readAsDataURL(formData.file);
+    } else {
+      // Если файла нет, просто сохраняем заявку
+      saveBrief();
+    }
   };
   
   return (
@@ -212,7 +267,7 @@ const BriefPage = () => {
               </div>
             </div>
             
-            <div className="form-footer">
+            <div className="form-footer-brief">
               <div className="contact-method-container">
                 <label className="contact-method-label">Предпочтительный способ связи</label>
                 <div className="contact-methods-wrapper">

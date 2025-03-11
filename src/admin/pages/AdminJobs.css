@@ -1,0 +1,15 @@
+/* src/admin/pages/AdminJobs.css */
+.admin-page-header {
+    margin-bottom: 2rem;
+  }
+  
+  .admin-page-header h2 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+  }
+  
+  .admin-page-header p {
+    color: #666;
+    font-size: 1rem;
+  }

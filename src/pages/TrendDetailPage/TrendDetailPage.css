@@ -1,0 +1,485 @@
+/* src/pages/TrendDetailPage/TrendDetailPage.css */
+.trend-detail-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.trend-hero {
+  background-color: #f5f5f5;
+  padding: 60px 0;
+}
+
+.trend-breadcrumbs {
+  margin-bottom: 20px;
+  color: #666;
+}
+
+.trend-breadcrumbs a {
+  color: #1890ff;
+  text-decoration: none;
+  margin: 0 5px;
+}
+
+.trend-breadcrumbs a:first-child {
+  margin-left: 0;
+}
+
+.trend-breadcrumbs span {
+  margin-left: 5px;
+  color: #333;
+}
+
+.trend-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.trend-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.trend-category {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: #1890ff;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.featured-badge {
+  background-color: #ff4d4f;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.trend-content {
+  flex: 1;
+  padding: 40px 0;
+}
+
+.trend-main-image {
+  position: relative;
+  margin-bottom: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.trend-main-image img {
+  width: 100%;
+  max-height: 500px;
+  object-fit: cover;
+  display: block;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.trend-main-image:hover .image-overlay {
+  opacity: 1;
+}
+
+.image-overlay i {
+  color: white;
+  font-size: 2rem;
+}
+
+.trend-description {
+  margin-bottom: 40px;
+  line-height: 1.6;
+  color: #333;
+}
+
+.trend-description p {
+  margin-bottom: 20px;
+}
+
+.related-trends {
+  margin-top: 60px;
+}
+
+.related-trends h3 {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.related-trends-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.related-trend-card {
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-trend-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.related-trend-image {
+  height: 150px;
+}
+
+.related-trend-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.related-trend-content {
+  padding: 15px;
+}
+
+.related-trend-category {
+  display: inline-block;
+  font-size: 0.8rem;
+  color: #1890ff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.related-trend-content h4 {
+  font-size: 1.1rem;
+  margin: 0;
+  color: #333;
+}
+
+/* Состояние загрузки */
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 0;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Сообщение об ошибке */
+.error-message {
+  text-align: center;
+  padding: 100px 0;
+}
+
+.error-message h2 {
+  color: #ff4d4f;
+  margin-bottom: 16px;
+}
+
+.error-message p {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #1890ff;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.back-btn:hover {
+  background-color: #40a9ff;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .trend-hero {
+    padding: 40px 0;
+  }
+  
+  .trend-hero h1 {
+    font-size: 2rem;
+  }
+  
+  .related-trends-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .trend-hero h1 {
+    font-size: 1.8rem;
+  }
+  
+  .related-trends-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.trend-detail-container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+.trend-detail-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.trend-category {
+  display: inline-block;
+  background-color: #f0f5ff;
+  color: #1890ff;
+  padding: 6px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: lowercase;
+}
+
+.trend-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  line-height: 1.2;
+  color: #333;
+  letter-spacing: -0.025em;
+}
+
+.trend-meta {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.trend-detail-image {
+  margin-bottom: 40px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.trend-detail-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.trend-detail-content {
+  margin-bottom: 60px;
+}
+
+.trend-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: #555;
+  margin-bottom: 30px;
+  font-weight: 500;
+  border-left: 4px solid #1890ff;
+  padding-left: 20px;
+}
+
+/* Стили для форматированного содержания */
+.trend-content {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #333;
+}
+
+.trend-content h1,
+.trend-content h2,
+.trend-content h3,
+.trend-content h4,
+.trend-content h5,
+.trend-content h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 700;
+  color: #222;
+  letter-spacing: -0.025em;
+}
+
+.trend-content h1 {
+  font-size: 2.2rem;
+}
+
+.trend-content h2 {
+  font-size: 1.8rem;
+}
+
+.trend-content h3 {
+  font-size: 1.5rem;
+}
+
+.trend-content p {
+  margin-bottom: 1.5em;
+}
+
+.trend-content ul,
+.trend-content ol {
+  margin-bottom: 1.5em;
+  padding-left: 1.5em;
+}
+
+.trend-content li {
+  margin-bottom: 0.5em;
+}
+
+.trend-content blockquote {
+  border-left: 4px solid #1890ff;
+  padding-left: 20px;
+  margin-left: 0;
+  margin-right: 0;
+  font-style: italic;
+  color: #555;
+}
+
+.trend-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.trend-content a {
+  color: #1890ff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(24, 144, 255, 0.3);
+  transition: all 0.2s;
+}
+
+.trend-content a:hover {
+  border-bottom-color: #1890ff;
+}
+
+.related-trends-section {
+  margin-bottom: 60px;
+}
+
+.related-trends-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 30px;
+  font-weight: 700;
+  color: #333;
+  text-transform: lowercase;
+  letter-spacing: -0.025em;
+}
+
+.trend-actions {
+  text-align: center;
+}
+
+.back-to-trends {
+  display: inline-block;
+  padding: 12px 30px;
+  background-color: #f5f5f5;
+  color: #333;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.back-to-trends:hover {
+  background-color: #e8e8e8;
+  transform: translateY(-2px);
+}
+
+/* Стили для загрузки и ошибок */
+.trend-detail-loading,
+.trend-detail-error {
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.trend-detail-error h2 {
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: #ff4d4f;
+}
+
+.trend-detail-error p {
+  margin-bottom: 30px;
+  color: #666;
+  max-width: 500px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .trend-detail-container {
+    padding: 40px 20px;
+  }
+  
+  .trend-title {
+    font-size: 2.2rem;
+  }
+  
+  .trend-description {
+    font-size: 1.1rem;
+  }
+  
+  .trend-content {
+    font-size: 1rem;
+  }
+}

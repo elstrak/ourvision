@@ -1,294 +1,398 @@
-.trends {
-    position: relative;
-    background-color: #B8C4B8; /* Светло-зеленый фон по умолчанию */
-    color: var(--color-black);
-    padding: var(--spacing-xl) 0;
-    transition: background-color 0.5s ease;
-    min-height: 100vh;
-  }
-  
-  .trends.scrolled {
-    background-color: #75ACDD; /* Голубой фон при прокрутке */
-  }
-  
-  .trends-header {
-    margin-bottom: var(--spacing-xl);
-    text-align: center;
-  }
-  
-  .trends-title {
-    font-family: Plain, sans-serif;
-    font-weight: 900;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: var(--spacing-md);
-    text-transform: lowercase;
-    letter-spacing: -0.025em;
-  }
-  
-  .trends-subtitle {
-    font-size: 1.25rem;
-    max-width: 700px;
-    margin: 0 auto;
-    opacity: 0.8;
-  }
-  
-  .trends-content {
-    display: flex;
-    gap: var(--spacing-xl);
-  }
-  
-  .trends-left {
-    flex: 0 0 40%;
-    position: sticky;
-    top: var(--spacing-xl);
-    align-self: flex-start;
-    height: fit-content;
-  }
-  
-  .trends-right {
-    flex: 0 0 50%;
-    display: flex;
+/* src/components/Trends/Trends.css */
+.trends-section {
+  padding: 80px 0;
+  background-color: #F8F9FA; /* Цвет фона как в FAQ */
+  color: #333; /* Черный текст */
+}
+
+.trends-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px; /* Увеличиваем отступ */
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  color: #333;
+  font-weight: 700;
+  font-family: Plain, sans-serif;
+  text-transform: lowercase;
+  letter-spacing: -0.025em;
+}
+
+.section-header p {
+  font-size: 1.1rem;
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto;
+  font-family: Plain, sans-serif;
+}
+
+.trends-flex {
+  display: flex;
+  gap: 60px; /* Увеличиваем расстояние между текстом и статьями */
+  align-items: flex-start;
+}
+
+.trends-intro {
+  flex: 0 0 30%;
+  color: #333;
+}
+
+.trends-description {
+  margin-bottom: 35px; /* Увеличиваем отступ */
+}
+
+.trends-description p {
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: #555;
+  font-family: Plain, sans-serif;
+  font-size: 1.2rem;
+}
+
+.trends-button {
+  display: inline-block;
+  padding: 12px 32px;
+  background-color: rgb(117, 172, 221); /* Голубой цвет кнопки */
+  border: none;
+  border-radius: 50px;
+  font-family: Plain, sans-serif;
+  font-weight: 700;
+  font-size: 1.125rem;
+  text-transform: lowercase;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  margin-top: 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(24, 144, 255, 0.2);
+}
+
+.trends-button:hover {
+  background-color: #40a9ff;
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(24, 144, 255, 0.3);
+}
+
+.trends-list {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-height: 500px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.trend-list-item {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  height: 100px;
+  overflow: hidden;
+}
+
+.trend-list-item:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.trend-list-link {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+}
+
+.trend-shape {
+  flex: 0 0 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.trend-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Вращающиеся тексты в трех секторах */
+.rotating-text-inner,
+.rotating-text-middle,
+.rotating-text-outer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.rotating-text-inner {
+  animation: rotate 10s linear infinite;
+}
+
+.rotating-text-middle {
+  animation: rotate-reverse 12s linear infinite;
+}
+
+.rotating-text-outer {
+  animation: rotate 15s linear infinite;
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes rotate-reverse {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.rotating-text-inner span,
+.rotating-text-middle span,
+.rotating-text-outer span {
+  position: absolute;
+  left: 50%;
+  font-family: Plain, sans-serif;
+  font-weight: 500;
+  color: white;
+}
+
+.rotating-text-inner span {
+  top: 0;
+  transform-origin: 0 25px;
+  transform: rotate(calc(60deg * var(--i)));
+  font-size: 0.7rem;
+}
+
+.rotating-text-middle span {
+  top: 0;
+  transform-origin: 0 35px;
+  transform: rotate(calc(60deg * var(--i)));
+  font-size: 0.7rem;
+}
+
+.rotating-text-outer span {
+  top: 0;
+  transform-origin: 0 40px;
+  transform: rotate(calc(60deg * var(--i)));
+  font-size: 0.7rem;
+}
+
+.trend-list-content {
+  flex: 1;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.trend-list-meta {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.trend-list-category {
+  background-color: #f0f5ff;
+  color: #1890ff;
+  padding: 3px 10px;
+  border-radius: 50px;
+  font-weight: 600;
+}
+
+.trend-list-date {
+  color: #999;
+}
+
+.trend-list-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 5px;
+  color: #333;
+  font-family: Plain, sans-serif;
+}
+
+.trend-list-excerpt {
+  color: #666;
+  font-size: 0.9rem;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-family: Plain, sans-serif;
+}
+
+/* Стили для состояний загрузки и ошибок */
+.trends-loading, .trends-error, .trends-empty {
+  flex: 0 0 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  color: #666;
+  font-family: Plain, sans-serif;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Стилизация скроллбара */
+.trends-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.trends-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.trends-list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.trends-list::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+  .trends-flex {
     flex-direction: column;
-    gap: var(--spacing-md);
+  }
+  
+  .trends-intro,
+  .trends-list,
+  .trends-loading,
+  .trends-error,
+  .trends-empty {
+    flex: 0 0 100%;
   }
   
   .trends-intro {
-    max-width: 100%;
-    position: relative;
+    margin-bottom: 30px;
   }
   
-  .trends-written-for {
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-sm);
-    text-transform: lowercase;
-    opacity: 0.8;
+  .trends-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+}
+
+@media (max-width: 768px) {
+  .trends-section {
+    padding: 60px 0;
   }
   
-  .trends-brand {
-    font-family: Plain, sans-serif;
-    font-weight: 700;
-    font-size: 2.5rem;
-    margin-bottom: var(--spacing-md);
-    text-transform: lowercase;
-    letter-spacing: -.025em;
+  .trends-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   
-  .trends-quote {
-    font-family: Plain, sans-serif;
-    font-weight: 700;
+  .section-header h2 {
     font-size: 2rem;
-    line-height: 1.2;
-    margin-bottom: var(--spacing-lg);
-    text-transform: lowercase;
-    letter-spacing: -.025em;
+  }
+  
+  .trends-flex {
+    width: 100%;
+    align-items: center;
+  }
+  
+  .trends-intro {
+    text-align: center;
+    max-width: 90%;
+  }
+  
+  .trends-description p {
+    text-align: center;
+  }
+  
+  .trends-list {
+    width: 90%;
+    margin: 0 auto;
+  }
+  
+  .trend-list-item {
+    height: auto;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .trend-list-link {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .trend-shape {
+    flex: 0 0 80px;
+    height: 80px;
+    width: 80px;
+    margin: 10px auto;
+  }
+  
+  .trend-list-content {
+    padding: 0 15px 15px;
+    text-align: center;
+    align-items: center;
+  }
+  
+  .trend-list-meta {
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
   }
   
   .trends-button {
-    display: inline-block;
-    padding: 12px 32px;
-    background-color: var(--color-black);
-    border: none;
-    border-radius: 50px;
-    font-family: Plain, sans-serif;
-    font-weight: 700;
-    font-size: 1.125rem;
-    text-transform: lowercase;
-    text-decoration: none;
-    color: var(--color-white);
-    transition: all 0.3s ease;
+    margin: 20px auto;
+    display: block;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .section-header h2 {
+    font-size: 1.8rem;
   }
   
-  .trends-button:hover {
-    background-color: #F7BFD9; /* Розовый при наведении */
-    color: var(--color-black);
-    transform: translateY(-2px);
+  .trends-list {
+    width: 95%;
   }
   
-  /* Стили для элементов трендов */
-  .trend-item {
-    display: flex;
-    gap: var(--spacing-lg);
-    margin-bottom: var(--spacing-md);
-    align-items: center;
-    padding: 1rem;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  .trend-list-title {
+    font-size: 1rem;
   }
-  
-  .trend-item.hovered {
-    background-color: rgba(255, 255, 255, 0.2);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Геометрические формы */
-  .trend-shape {
-    flex: 0 0 100px;
-    height: 100px;
-    min-width: 100px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease;
-    position: relative;
-  }
-  
-  .trend-item.hovered .trend-shape {
-    transform: rotate(5deg);
-  }
-  
-  .trend-shape-circle {
-    border-radius: 50%;
-  }
-  
-  .trend-shape-hexagon {
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-  }
-  
-  .trend-shape-pentagon {
-    clip-path: polygon(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);
-  }
-  
-  .trend-shape-square {
-    border-radius: 8px;
-  }
-  
-  .trend-circle-container {
-    width: 85%;
-    height: 85%;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    margin: auto;
-  }
-  
-  .trend-circle {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: var(--color-white);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    will-change: transform;
-  }
-  
-  .trend-text-circle {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.3s ease, filter 0.3s ease;
-    will-change: transform, filter;
-  }
-  
-  .trend-text-circle svg {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .trend-text-circle text {
-    font-size: 3.8px; /* Slightly smaller to fit more text */
-    font-weight: 700;
-    fill: var(--color-black);
-    letter-spacing: 0.1px;
-    text-transform: uppercase;
-  }
-  
-  .trend-text-circle-1 {
-    width: 90%;
-    height: 90%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-  }
-  
-  .trend-text-circle-2 {
-    width: 70%;
-    height: 70%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-  }
-  
-  .trend-text-circle-3 {
-    width: 50%;
-    height: 50%;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 50%;
-  }
-  
-  .trend-text-circle textPath {
-    dominant-baseline: middle;
-    text-anchor: middle;
-  }
-  
-  .trend-content {
-    flex: 1;
-  }
-  
-  .trend-date {
-    font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.6);
-    margin-bottom: 0.25rem;
-  }
-  
-  .trend-title {
-    font-family: Plain, sans-serif;
-    font-weight: 700;
-    font-size: 1.5rem;
-    line-height: 1.2;
-    text-transform: lowercase;
-    letter-spacing: -0.025em;
-  }
-  
-  /* Адаптивность */
-  @media (max-width: 992px) {
-    .trends-content {
-      flex-direction: column;
-    }
-    
-    .trends-left {
-      position: relative;
-      top: 0;
-      flex: 0 0 auto;
-      margin-bottom: var(--spacing-xl);
-    }
-    
-    .trends-right {
-      flex: 0 0 auto;
-    }
-  }
-  
-  @media (max-width: 768px) {
-    .trend-item {
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .trend-shape {
-      margin-bottom: var(--spacing-md);
-    }
-    
-    .trends-title {
-      font-size: 2.5rem;
-    }
-    
-    .trends-quote {
-      font-size: 1.5rem;
-    }
-  }
-  
-  /* Ensure the hover effect works well with the square shape */
-  .trend-item.hovered .trend-shape {
-    transform: rotate(5deg);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-  }
+}

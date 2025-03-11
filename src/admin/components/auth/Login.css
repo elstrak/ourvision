@@ -1,0 +1,80 @@
+/* src/admin/components/auth/Login.css */
+.admin-login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .admin-login-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .admin-login-logo {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .admin-login-logo img {
+    height: 60px;
+  }
+  
+  .admin-login-form h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .admin-form-group {
+    margin-bottom: 1rem;
+  }
+  
+  .admin-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+  
+  .admin-form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+  
+  .admin-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #E53935;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .admin-btn:hover {
+    background-color: #C62828;
+  }
+  
+  .admin-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .admin-alert {
+    background-color: #f8d7da;
+    color: #721c24;
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 4px;
+    text-align: center;
+  }

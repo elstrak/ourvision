@@ -8,8 +8,8 @@ import Contact from '../../components/Contact/Contact';
 import Footer from '../../components/Footer/Footer';
 import Services from '../../components/Services/Services';
 import './HomePage.css';  
-import Testimonials from '../../components/Testimonials/Testimonials';
 import FAQ from '../../components/FAQ/FAQ';
+import AllTestimonials from '../../components/Testimonials/AllTestimonials';
 const HomePage = () => {
   return (
     <div className="home-page">
@@ -20,7 +20,7 @@ const HomePage = () => {
       <About />
       <Services />
       <Trends />
-      <Testimonials />
+      <AllTestimonials />
       <FAQ />
       <Footer />
     </div>

@@ -1,0 +1,15 @@
+.admin-page-header {
+    margin-bottom: 30px;
+  }
+  
+  .admin-page-header h2 {
+    margin: 0 0 10px;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  
+  .admin-page-header p {
+    margin: 0;
+    color: #666;
+    font-size: 1rem;
+  }

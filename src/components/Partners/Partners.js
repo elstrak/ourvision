@@ -1,11 +1,20 @@
 import React, { useRef, useState, useEffect } from 'react';
 import './Partners.css';
 // Импортируйте видеофайлы, если они находятся в src
-import video1 from '../../assets/videos/video1.mp4';
-import video2 from '../../assets/videos/video2.mp4';
-import video3 from '../../assets/videos/video3.mp4';
-import video4 from '../../assets/videos/video4.mp4';
-import video5 from '../../assets/videos/video5.mp4';
+import video1 from '../../assets/videos/video1.MP4';
+import video2 from '../../assets/videos/video2.MP4';
+import video3 from '../../assets/videos/video3.MP4';
+import video4 from '../../assets/videos/video4.MP4';
+import video5 from '../../assets/videos/video5.MP4';
+import video6 from '../../assets/videos/video6.mp4';
+import video7 from '../../assets/videos/video7.mp4';
+import video8 from '../../assets/videos/video8.mp4';
+import video9 from '../../assets/videos/video9.mp4';
+import video10 from '../../assets/videos/video10.mp4';
+import video11 from '../../assets/videos/video11.mp4';
+import video12 from '../../assets/videos/video12.mp4';
+import video13 from '../../assets/videos/video13.mp4';
+import video14 from '../../assets/videos/video14.mp4';
 
 const Partners = () => {
   const scrollContainerRef = useRef(null);
@@ -17,18 +26,20 @@ const Partners = () => {
   
   // Пример данных о партнерах с правильными путями
   const partners = [
-    { id: 1, name: 'Сбербанк', videoSrc: video1 },
-    { id: 2, name: 'Газпром', videoSrc: video2 },
-    { id: 3, name: 'Яндекс', videoSrc: video3 },
-    { id: 4, name: 'МТС', videoSrc: video4 },
-    { id: 5, name: 'Мегафон', videoSrc: video5 },
-    // { id: 6, name: 'Билайн', videoSrc: '/videos/partner6.mp4' },
-    // { id: 7, name: 'Альфа-Банк', videoSrc: '/videos/partner7.mp4' },
-    // { id: 8, name: 'ВТБ', videoSrc: '/videos/partner8.mp4' },
-    // { id: 9, name: 'Тинькофф', videoSrc: '/videos/partner9.mp4' },
-    // { id: 10, name: 'Ростелеком', videoSrc: '/videos/partner10.mp4' },
-    // { id: 11, name: 'Аэрофлот', videoSrc: '/videos/partner11.mp4' },
-    // { id: 12, name: 'РЖД', videoSrc: '/videos/partner12.mp4' },
+    { id: 1, name: 'Lavasia', videoSrc: video1 },
+    { id: 2, name: 'Da Vinci', videoSrc: video2 },
+    { id: 3, name: 'Винотека "Клевер"', videoSrc: video3 },
+    { id: 4, name: 'Барбершоп Brics', videoSrc: video4 },
+    { id: 5, name: 'Ля’Шеф', videoSrc: video5 },
+    { id: 6, name: 'Терраса Гриль', videoSrc: video6 },
+    { id: 7, name: 'Винотека "Клевер"', videoSrc: video14 },
+    { id: 8, name: 'Ля’Шеф', videoSrc: video7 },
+    { id: 9, name: 'Барбершоп Brics', videoSrc: video8 },
+    { id: 10, name: 'Da Vinci', videoSrc: video9 },
+    { id: 11, name: 'Lavasia', videoSrc: video10 },
+    { id: 12, name: 'Камгазблок', videoSrc: video11 },
+    { id: 13, name: 'Камгазблок', videoSrc: video12 },
+    { id: 14, name: 'Камгазблок', videoSrc: video13 },
   ];
 
   // Обработчики для drag'n'scroll
@@ -62,15 +73,43 @@ const Partners = () => {
     setActiveVideo(id);
     const video = document.getElementById(`video-${id}`);
     if (video) {
-      video.play();
+      // Добавляем проверку, чтобы избежать конфликтов воспроизведения
+      const playPromise = video.play();
+      
+      // Обрабатываем promise, возвращаемый методом play()
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          // Воспроизведение успешно началось
+        })
+        .catch(error => {
+          // Автовоспроизведение было предотвращено
+          console.log("Воспроизведение было предотвращено:", error);
+        });
+      }
     }
   };
 
   const handleVideoLeave = (id) => {
     const video = document.getElementById(`video-${id}`);
     if (video) {
-      video.pause();
-      video.currentTime = 0;
+      // Добавляем проверку, чтобы избежать конфликтов воспроизведения/паузы
+      const playPromise = video.play();
+      
+      if (playPromise !== undefined) {
+        playPromise.then(_ => {
+          // Воспроизведение успешно началось, теперь можно безопасно поставить на паузу
+          video.pause();
+          video.currentTime = 0;
+        })
+        .catch(error => {
+          // Автовоспроизведение было предотвращено, но мы все равно можем сбросить время
+          video.currentTime = 0;
+        });
+      } else {
+        // Для старых браузеров, которые не возвращают promise
+        video.pause();
+        video.currentTime = 0;
+      }
     }
     setActiveVideo(null);
   };

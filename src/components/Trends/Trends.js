@@ -1,234 +1,197 @@
-import React, { useEffect, useRef, useState } from 'react';
+// src/components/Trends/Trends.js
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 import './Trends.css';
-
-const TrendItem = ({ trend, isHovered, onHover }) => {
-  const circleRef = useRef(null);
-  const textCircle1Ref = useRef(null);
-  const textCircle2Ref = useRef(null);
-  const textCircle3Ref = useRef(null);
-  const [animationPhase, setAnimationPhase] = useState(0);
-
-  // Animation for the circles
-  useEffect(() => {
-    let animationFrameId;
-    let startTime = Date.now();
-    const animationDuration = 8000; // 8 seconds for a full animation cycle
-    
-    const animate = () => {
-      const currentTime = Date.now();
-      const elapsedTime = currentTime - startTime;
-      const progress = (elapsedTime % animationDuration) / animationDuration;
-      
-      // Determine animation phase (0-0.5: clockwise, 0.5-1: counter-clockwise)
-      const phase = progress < 0.5 ? 0 : 1;
-      
-      if (phase !== animationPhase) {
-        setAnimationPhase(phase);
-      }
-      
-      if (circleRef.current && textCircle1Ref.current && textCircle2Ref.current && textCircle3Ref.current) {
-        // Main circle rotation
-        const baseRotation = progress < 0.5 
-          ? progress * 2 * 20 // 0-20 degrees in first phase
-          : (1 - (progress - 0.5) * 2) * 20; // 20-0 degrees in second phase
-        
-        circleRef.current.style.transform = `rotate(${baseRotation}deg)`;
-        
-        if (phase === 0) {
-          // Phase 1: blur circles 1 and 3, clockwise rotation
-          const normalizedProgress = progress * 2; // 0-1 in first phase
-          
-          textCircle1Ref.current.style.transform = `rotate(${normalizedProgress * 15}deg)`;
-          textCircle1Ref.current.style.filter = `blur(${normalizedProgress * 1.5}px)`;
-          
-          textCircle2Ref.current.style.transform = `rotate(${-normalizedProgress * 18}deg)`;
-          textCircle2Ref.current.style.filter = 'blur(0px)';
-          
-          textCircle3Ref.current.style.transform = `rotate(${normalizedProgress * 12}deg)`;
-          textCircle3Ref.current.style.filter = `blur(${normalizedProgress * 1.5}px)`;
-        } else {
-          // Phase 2: blur circle 2, counter-clockwise rotation
-          const normalizedProgress = (progress - 0.5) * 2; // 0-1 in second phase
-          
-          textCircle1Ref.current.style.transform = `rotate(${15 - normalizedProgress * 15}deg)`;
-          textCircle1Ref.current.style.filter = `blur(${1.5 - normalizedProgress * 1.5}px)`;
-          
-          textCircle2Ref.current.style.transform = `rotate(${-18 + normalizedProgress * 18}deg)`;
-          textCircle2Ref.current.style.filter = `blur(${normalizedProgress * 1.5}px)`;
-          
-          textCircle3Ref.current.style.transform = `rotate(${12 - normalizedProgress * 12}deg)`;
-          textCircle3Ref.current.style.filter = `blur(${1.5 - normalizedProgress * 1.5}px)`;
-        }
-      }
-      
-      animationFrameId = requestAnimationFrame(animate);
-    };
-    
-    animationFrameId = requestAnimationFrame(animate);
-    
-    return () => {
-      cancelAnimationFrame(animationFrameId);
-    };
-  }, [animationPhase]);
-
-  return (
-    <div 
-      className={`trend-item ${isHovered ? 'hovered' : ''}`}
-      onMouseEnter={() => onHover(trend.id)}
-      onMouseLeave={() => onHover(null)}
-    >
-      <div 
-        className="trend-shape trend-shape-square" 
-        style={{ backgroundColor: trend.color }}
-      >
-        <div className="trend-circle-container">
-          <div className="trend-circle" ref={circleRef}>
-            <div className="trend-text-circle trend-text-circle-1" ref={textCircle1Ref}>
-              <svg viewBox="0 0 100 100">
-                <path id={`curve1-${trend.id}`} d="M 50, 50 m -40, 0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0" fill="transparent" />
-                <text>
-                  <textPath xlinkHref={`#curve1-${trend.id}`}>
-                    {trend.circleTexts.outer}
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-            
-            <div className="trend-text-circle trend-text-circle-2" ref={textCircle2Ref}>
-              <svg viewBox="0 0 100 100">
-                <path id={`curve2-${trend.id}`} d="M 50, 50 m -30, 0 a 30,30 0 1,1 60,0 a 30,30 0 1,1 -60,0" fill="transparent" />
-                <text>
-                  <textPath xlinkHref={`#curve2-${trend.id}`}>
-                    {trend.circleTexts.middle}
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-            
-            <div className="trend-text-circle trend-text-circle-3" ref={textCircle3Ref}>
-              <svg viewBox="0 0 100 100">
-                <path id={`curve3-${trend.id}`} d="M 50, 50 m -20, 0 a 20,20 0 1,1 40,0 a 20,20 0 1,1 -40,0" fill="transparent" />
-                <text>
-                  <textPath xlinkHref={`#curve3-${trend.id}`}>
-                    {trend.circleTexts.inner}
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div className="trend-content">
-        <div className="trend-date">{trend.date}</div>
-        <h3 className="trend-title">{trend.title}</h3>
-      </div>
-    </div>
-  );
-};
+import TrendItem from './TrendItem';
 
 const Trends = () => {
-  const [hoveredTrend, setHoveredTrend] = useState(null);
-  
-  // Updated trends data with more text to fill the entire circle
-  const trends = [
-    {
-      id: 1,
-      title: "meta's new ai content disclosure tag: what it means for socials",
-      date: "11 February 2025",
-      color: '#E53935', // Red
-      textColor: '#FFFFFF',
-      circleTexts: {
-        outer: "• AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES • AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES • AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES •",
-        middle: "• ALGORITHM • SOCIAL MEDIA • CONTENT POLICY • REGULATION • CREATORS • BRANDS • MARKETING • STRATEGY • ALGORITHM • SOCIAL MEDIA • CONTENT POLICY • REGULATION • CREATORS • BRANDS • MARKETING • STRATEGY •",
-        inner: "• FUTURE • TRENDS • DIGITAL • INNOVATION • TECH • FUTURE • TRENDS • DIGITAL • INNOVATION • TECH • FUTURE • TRENDS • DIGITAL • INNOVATION • TECH •"
-      }
-    },
-    {
-      id: 2,
-      title: "tiktok's new creator monetization features explained",
-      date: "3 February 2025",
-      color: '#F7BFD9', // Pink (from the palette)
-      textColor: '#222222',
-      circleTexts: {
-        outer: "• TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES • TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES • TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES •",
-        middle: "• SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • ",
-        inner: "• GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY • GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY • GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY •"
-      }
-    },
-    {
-      id: 3,
-      title: "sustainable marketing: how brands are going green on social",
-      date: "28 January 2025",
-      color: '#76ACDD', // Light green
-      textColor: '#222222',
-      circleTexts: {
-        outer: "• SUSTAINABILITY • ECO-FRIENDLY • GREEN MARKETING • CONSCIOUS BRANDS • ENVIRONMENT • SOCIAL IMPACT • RESPONSIBILITY • SUSTAINABILITY • ECO-FRIENDLY • GREEN MARKETING • CONSCIOUS BRANDS • ENVIRONMENT • SOCIAL IMPACT • RESPONSIBILITY • SUSTAINABILITY • ECO-FRIENDLY • GREEN MARKETING • CONSCIOUS BRANDS • ENVIRONMENT • SOCIAL IMPACT • RESPONSIBILITY • SUSTAINABILITY • ECO-FRIENDLY • GREEN MARKETING • CONSCIOUS BRANDS • ENVIRONMENT • SOCIAL IMPACT • RESPONSIBILITY •",
-        middle: "• ENVIRONMENTAL • SOCIAL RESPONSIBILITY • VALUES • ETHICS • CONSUMERS • ENGAGEMENT • AUTHENTICITY • ENVIRONMENTAL • SOCIAL RESPONSIBILITY • VALUES • ETHICS • CONSUMERS • ENGAGEMENT • AUTHENTICITY • ENVIRONMENTAL • SOCIAL RESPONSIBILITY • VALUES • ETHICS • CONSUMERS • ENGAGEMENT • AUTHENTICITY •",
-        inner: "• FUTURE • PLANET • CHANGE • IMPACT • VALUES • FUTURE • PLANET • CHANGE • IMPACT • VALUES • FUTURE • PLANET • CHANGE • IMPACT • VALUES •"
-      }
-    },
-    {
-      id: 4,
-      title: "meta's new ai content disclosure tag: what it means for socials",
-      date: "11 February 2025",
-      color: '#E53935', // Red
-      textColor: '#FFFFFF',
-      circleTexts: {
-        outer: "• AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES • AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES • AI CONTENT • DISCLOSURE • META • INSTAGRAM • FACEBOOK • TRANSPARENCY • ALGORITHM • POLICY • REGULATION • SOCIAL MEDIA • UPDATES •",
-        middle: "• ALGORITHM • SOCIAL MEDIA • CONTENT POLICY • REGULATION • CREATORS • BRANDS • MARKETING • STRATEGY • ALGORITHM • SOCIAL MEDIA • CONTENT POLICY • REGULATION • CREATORS • BRANDS • MARKETING • STRATEGY •",
-        inner: "• FUTURE • TRENDS • DIGITAL • INNOVATION • TECH • FUTURE • TRENDS • DIGITAL • INNOVATION • TECH • FUTURE • TRENDS • DIGITAL • INNOVATION • TECH •"
-      }
-    },
-    {
-      id: 5,
-      title: "tiktok's new creator monetization features explained",
-      date: "3 February 2025",
-      color: '#F7BFD9', // Pink (from the palette)
-      textColor: '#222222',
-      circleTexts: {
-        outer: "• TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES • TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES • TIKTOK • CREATORS • MONETIZATION • REVENUE • ENGAGEMENT • STRATEGY • GROWTH • PLATFORM • FEATURES • UPDATES •",
-        middle: "• SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • SHORT FORM • VIDEO • CONTENT • VIRAL • TRENDS • CREATORS • AUDIENCE • ENGAGEMENT • ",
-        inner: "• GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY • GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY • GROWTH • AUDIENCE • REACH • REVENUE • STRATEGY •"
-      }
-    },
-  ];
+  const [trends, setTrends] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  return (
-    <section className="trends">
-      <div className="container">
-        <div className="trends-header">
-          <h2 className="trends-title">тренды социальных медиа</h2>
-          <p className="trends-subtitle">
-            Мы постоянно отслеживаем изменения в индустрии, чтобы предлагать актуальные решения
-          </p>
-        </div>
+  // Цвета для квадратов
+  const colors = ['#FF4D4F', '#1890FF', '#52C41A', '#F759AB'];
+
+  // Функция для получения случайного цвета
+  const getRandomColor = () => {
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
+  // Присваиваем каждому тренду случайный цвет
+  const assignColorsToTrends = (trendsData) => {
+    return trendsData.map(trend => ({
+      ...trend,
+      color: getRandomColor()
+    }));
+  };
+
+  useEffect(() => {
+    const fetchTrends = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/trends');
         
-        <div className="trends-content">
-          <div className="trends-left">
+        // Берем последние 5 трендов и присваиваем им цвета
+        const latestTrends = response.data.data.slice(0, 5);
+        const trendsWithColors = assignColorsToTrends(latestTrends);
+        
+        setTrends(trendsWithColors);
+        setError(null);
+      } catch (err) {
+        console.error('Ошибка при загрузке трендов:', err);
+        setError('Не удалось загрузить тренды. Пожалуйста, попробуйте позже.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchTrends();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="trends-section">
+        <div className="trends-container">
+          <div className="section-header">
+            <h2>тренды и инсайты</h2>
+            <p>узнайте о последних тенденциях в мире дизайна и технологий</p>
+          </div>
+          <div className="trends-flex">
             <div className="trends-intro">
-              <div className="trends-written-for">исследование для</div>
-              <div className="trends-brand">smm-studio</div>
-              <div className="trends-quote">
-                Будущее социальных медиа уже здесь, и мы помогаем брендам быть в авангарде.
+              <div className="trends-description">
+                <p>следите за актуальными трендами в SMM и маркетинге. Используйте наши инсайты для создания эффективных стратегий.</p>
               </div>
-              <a href="#contact" className="trends-button">получить полный отчет</a>
+              <Link to="/trends" className="trends-button">полезности</Link>
+            </div>
+            <div className="trends-loading">
+              <div className="spinner"></div>
+              <p>Загрузка трендов...</p>
             </div>
           </div>
-          
-          <div className="trends-right">
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="trends-section">
+        <div className="trends-container">
+          <div className="section-header">
+            <h2>тренды и инсайты</h2>
+            <p>Узнайте о последних тенденциях в мире дизайна и технологий</p>
+          </div>
+          <div className="trends-flex">
+            <div className="trends-intro">
+              <div className="trends-description">
+                <p>Следите за актуальными трендами в SMM и маркетинге. Используйте наши инсайты для создания эффективных стратегий.</p>
+              </div>
+              <Link to="/trends" className="trends-button">полезности</Link>
+            </div>
+            <div className="trends-error">
+              <p>{error}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (trends.length === 0) {
+    return (
+      <div className="trends-section">
+        <div className="trends-container">
+          <div className="section-header">
+            <h2>Тренды и инсайты</h2>
+            <p>Узнайте о последних тенденциях в мире дизайна и технологий</p>
+          </div>
+          <div className="trends-flex">
+            <div className="trends-intro">
+              <div className="trends-description">
+                <p>Следите за актуальными трендами в SMM и маркетинге. Используйте наши инсайты для создания эффективных стратегий.</p>
+              </div>
+              <Link to="/trends" className="trends-button">Смотреть все тренды</Link>
+            </div>
+            <div className="trends-empty">
+              <p>Тренды не найдены. <Link to="/admin/trends">Добавьте первый тренд</Link></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="trends-section">
+      <div className="trends-container">
+        <div className="section-header">
+          <h2>тренды и инсайты</h2>
+          <p>узнайте о последних тенденциях в мире дизайна и технологий</p>
+        </div>
+        <div className="trends-flex">
+          <div className="trends-intro">
+            <div className="trends-description">
+              <p>следите за актуальными трендами в SMM и маркетинге. 
+                <br />
+                используйте наши инсайты для создания эффективных стратегий.</p>
+            </div>
+            <Link to="/trends" className="trends-button">полезности</Link>
+          </div>
+          <div className="trends-list">
             {trends.map(trend => (
-              <TrendItem 
-                key={trend.id}
-                trend={trend}
-                isHovered={hoveredTrend === trend.id}
-                onHover={setHoveredTrend}
-              />
+              <div key={trend._id} className="trend-list-item">
+                <Link to={`/trends/${trend._id}`} className="trend-list-link">
+                  <div className="trend-shape" style={{ backgroundColor: trend.color }}>
+                    <div className="trend-circle">
+                      <div className="rotating-text-inner">
+                        <span style={{ '--i': 1 }}>т</span>
+                        <span style={{ '--i': 2 }}>р</span>
+                        <span style={{ '--i': 3 }}>е</span>
+                        <span style={{ '--i': 4 }}>н</span>
+                        <span style={{ '--i': 5 }}>д</span>
+                        <span style={{ '--i': 6 }}>•</span>
+                        
+                      </div>
+                      <div className="rotating-text-middle">
+                        <span style={{ '--i': 1 }}>и</span>
+                        <span style={{ '--i': 2 }}>н</span>
+                        <span style={{ '--i': 3 }}>с</span>
+                        <span style={{ '--i': 4 }}>а</span>
+                        <span style={{ '--i': 5 }}>й</span>
+                        <span style={{ '--i': 6 }}>т</span>
+                      </div>
+                      <div className="rotating-text-outer">
+                        <span style={{ '--i': 1 }}>с</span>
+                        <span style={{ '--i': 2 }}>м</span>
+                        <span style={{ '--i': 3 }}>м</span>
+                        <span style={{ '--i': 4 }}>•</span>
+                        <span style={{ '--i': 5 }}>н</span>
+                        <span style={{ '--i': 6 }}>о</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="trend-list-content">
+                    <div className="trend-list-meta">
+                      <span className="trend-list-category">{trend.category}</span>
+                      <span className="trend-list-date">
+                        {new Date(trend.createdAt).toLocaleDateString('ru-RU')}
+                      </span>
+                    </div>
+                    <h3 className="trend-list-title">{trend.title}</h3>
+                    <p className="trend-list-excerpt">
+                      {trend.description.length > 60 ? 
+                        `${trend.description.substring(0, 60)}...` : trend.description}
+                    </p>
+                  </div>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,303 +1,235 @@
 // src/pages/TrendsPage/TrendsPage.js
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 import './TrendsPage.css';
-import '../../styles/global.css';
 import Header from '../../components/Header/Header';
 import Footer from '../../components/Footer/Footer';
 
-const TrendItem = ({ trend }) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div 
-      className={`trend-page-item ${isHovered ? 'hovered' : ''}`}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div 
-        className={`trend-shape ${trend.shape}`}
-        style={{ backgroundColor: trend.color }}
-      >
-      </div>
-      
-      <div className="trend-content">
-        <div className="trend-date">{trend.date}</div>
-        <h3 className="trend-title">{trend.title}</h3>
-        {trend.categories && (
-          <div className="trend-categories">
-            {trend.categories.map(category => (
-              <span key={category} className="trend-category">{category}</span>
-            ))}
-          </div>
-        )}
-      </div>
-    </div>
-  );
-};
-
-const MonthSection = ({ month, year, trends }) => {
-  return (
-    <div className="month-section">
-      <div className="month-header">
-        <h2 className="month-title">{month} {year}</h2>
-        <div className="month-divider"></div>
-      </div>
-      <div className="month-trends">
-        {trends.map(trend => (
-          <TrendItem key={trend.id} trend={trend} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const TrendsPage = () => {
-  // All available categories
-  const allCategories = [
-    'AI', 'Social Media', 'Content Strategy', 'Analytics', 
-    'Influencer Marketing', 'Branding', 'Engagement', 
-    'Advertising', 'Video Content', 'Trends'
+  const [trends, setTrends] = useState([]);
+  const [filteredTrends, setFilteredTrends] = useState([]);
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeYear, setActiveYear] = useState('all');
+  const [activeMonth, setActiveMonth] = useState('all');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [categories, setCategories] = useState([]);
+
+  // Месяцы для фильтрации
+  const months = [
+    { value: 'january', label: 'январь' },
+    { value: 'february', label: 'февраль' },
+    { value: 'march', label: 'март' },
+    { value: 'april', label: 'апрель' },
+    { value: 'may', label: 'май' },
+    { value: 'june', label: 'июнь' },
+    { value: 'july', label: 'июль' },
+    { value: 'august', label: 'август' },
+    { value: 'september', label: 'сентябрь' },
+    { value: 'october', label: 'октябрь' },
+    { value: 'november', label: 'ноябрь' },
+    { value: 'december', label: 'декабрь' }
   ];
-  
-  // State for filters
-  const [selectedYear, setSelectedYear] = useState('All');
-  const [selectedMonths, setSelectedMonths] = useState(['All']);
-  const [selectedCategories, setSelectedCategories] = useState([]);
-  const [filteredTrends, setFilteredTrends] = useState({});
-  
-  // Available years and months for filters
-  const years = ['All', '2025', '2024'];
-  const months = ['All', 'January', 'February', 'March', 'April', 'May', 'June', 
-                 'July', 'August', 'September', 'October', 'November', 'December'];
 
-  // All trends data with categories
-  const allTrends = {
-    'February 2025': [
-      {
-        id: 1,
-        title: "meta's new ai content disclosure tag: what it means for socials",
-        date: "11 February 2025",
-        color: '#4285F4', // Blue
-        shape: "trend-shape-circle",
-        categories: ['AI', 'Social Media', 'Content Strategy']
-      }
-    ],
-    'January 2025': [
-      {
-        id: 2,
-        title: "less censorship, more chaos: meta's new route",
-        date: "13 January 2025",
-        color: '#4285F4', // Blue
-        shape: "trend-shape-circle",
-        categories: ['Social Media', 'Content Strategy', 'Trends']
-      }
-    ],
-    'December 2024': [
-      {
-        id: 3,
-        title: "the beste youtube ads of 2024",
-        date: "24 December 2024",
-        color: '#FF7043', // Coral
-        shape: "trend-shape-circle",
-        categories: ['Video Content', 'Advertising', 'Engagement']
-      },
-      {
-        id: 4,
-        title: "what about facebook?",
-        date: "10 December 2024",
-        color: '#4285F4', // Blue
-        shape: "trend-shape-circle",
-        categories: ['Social Media', 'Analytics', 'Engagement']
-      }
-    ],
-    'November 2024': [
-      {
-        id: 5,
-        title: "time for an instagram reset?",
-        date: "28 November 2024",
-        color: '#FFCA28', // Yellow
-        shape: "trend-shape-circle",
-        categories: ['Social Media', 'Branding', 'Influencer Marketing']
-      }
-    ]
-  };
-
-  // Handle category selection
-  const toggleCategory = (category) => {
-    if (selectedCategories.includes(category)) {
-      setSelectedCategories(selectedCategories.filter(cat => cat !== category));
-    } else {
-      setSelectedCategories([...selectedCategories, category]);
-    }
-  };
-
-  // Handle month selection
-  const toggleMonth = (month) => {
-    if (month === 'All') {
-      setSelectedMonths(['All']);
-      return;
-    }
-    
-    // If 'All' is currently selected, remove it
-    const newSelectedMonths = selectedMonths.filter(m => m !== 'All');
-    
-    if (selectedMonths.includes(month)) {
-      // Remove the month if it's already selected
-      const updatedMonths = newSelectedMonths.filter(m => m !== month);
-      // If no months left, select 'All'
-      setSelectedMonths(updatedMonths.length === 0 ? ['All'] : updatedMonths);
-    } else {
-      // Add the month
-      setSelectedMonths([...newSelectedMonths, month]);
-    }
-  };
-
-  // Handle year selection
-  const handleYearChange = (year) => {
-    setSelectedYear(year);
-  };
-
-  // Reset all filters
-  const resetFilters = () => {
-    setSelectedYear('All');
-    setSelectedMonths(['All']);
-    setSelectedCategories([]);
-  };
-
-  // Filter trends based on selected filters
   useEffect(() => {
-    let filtered = { ...allTrends };
-    
-    // Filter by year
-    if (selectedYear !== 'All') {
-      filtered = Object.entries(filtered).reduce((acc, [monthYear, trends]) => {
-        if (monthYear.includes(selectedYear)) {
-          acc[monthYear] = trends;
-        }
-        return acc;
-      }, {});
-    }
-    
-    // Filter by months
-    if (!selectedMonths.includes('All')) {
-      filtered = Object.entries(filtered).reduce((acc, [monthYear, trends]) => {
-        const [month] = monthYear.split(' ');
-        if (selectedMonths.includes(month)) {
-          acc[monthYear] = trends;
-        }
-        return acc;
-      }, {});
-    }
-    
-    // Filter by categories
-    if (selectedCategories.length > 0) {
-      filtered = Object.entries(filtered).reduce((acc, [monthYear, trends]) => {
-        const filteredTrends = trends.filter(trend => 
-          trend.categories.some(category => selectedCategories.includes(category))
-        );
+    const fetchTrends = async () => {
+      try {
+        setLoading(true);
+        const response = await axios.get('/api/trends');
+        const trendsData = response.data.data;
+        setTrends(trendsData);
+        setFilteredTrends(trendsData);
         
-        if (filteredTrends.length > 0) {
-          acc[monthYear] = filteredTrends;
-        }
+        // Извлекаем уникальные категории из трендов
+        const uniqueCategories = [...new Set(trendsData.map(trend => trend.category))];
+        setCategories(uniqueCategories);
         
-        return acc;
-      }, {});
+        setError(null);
+      } catch (err) {
+        console.error('Ошибка при загрузке трендов:', err);
+        setError('Не удалось загрузить тренды. Пожалуйста, попробуйте позже.');
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchTrends();
+  }, []);
+
+  // Применение всех фильтров
+  useEffect(() => {
+    let result = [...trends];
+    
+    // Фильтр по категории
+    if (activeCategory !== 'all') {
+      result = result.filter(trend => trend.category === activeCategory);
     }
     
-    setFilteredTrends(filtered);
-  }, [selectedYear, selectedMonths, selectedCategories]);
+    // Фильтр по году
+    if (activeYear !== 'all') {
+      result = result.filter(trend => {
+        const trendYear = new Date(trend.createdAt).getFullYear().toString();
+        return trendYear === activeYear;
+      });
+    }
+    
+    // Фильтр по месяцу
+    if (activeMonth !== 'all') {
+      result = result.filter(trend => {
+        const trendMonth = new Date(trend.createdAt).getMonth();
+        const monthIndex = months.findIndex(m => m.value === activeMonth);
+        return trendMonth === monthIndex;
+      });
+    }
+    
+    setFilteredTrends(result);
+  }, [activeCategory, activeYear, activeMonth, trends]);
+
+  // Обработчики фильтров
+  const handleCategoryFilter = (category) => {
+    setActiveCategory(category);
+  };
+  
+  const handleYearFilter = (year) => {
+    setActiveYear(year);
+  };
+  
+  const handleMonthFilter = (month) => {
+    setActiveMonth(month);
+  };
+  
+  // Форматирование даты
+  const formatDate = (dateString) => {
+    const options = { day: 'numeric', month: 'long', year: 'numeric' };
+    return new Date(dateString).toLocaleDateString('ru-RU', options);
+  };
 
   return (
     <div className="trends-page">
+      <Helmet>
+        <title>Тренды | Наш сайт</title>
+        <meta name="description" content="Актуальные тренды и новости в мире дизайна и технологий" />
+      </Helmet>
+      
       <Header />
-      <div className="trends-page-container">
-        <div className="trends-page-header">
-          <h1 className="trends-page-title">тренды социальных медиа</h1>
-          <p className="trends-page-subtitle">
-            Мы постоянно отслеживаем изменения в индустрии, чтобы предлагать актуальные решения
-          </p>
-        </div>
-        
-        <div className="trends-page-content">
-          <div className="trends-page-left">
-            <div className="trends-filters">
-              <h3 className="filters-title">Фильтры</h3>
-              
-              <div className="filter-section">
-                <h4 className="filter-heading">Год</h4>
-                <div className="filter-options">
-                  {years.map(year => (
-                    <button 
-                      key={year}
-                      className={`filter-button ${selectedYear === year ? 'active' : ''}`}
-                      onClick={() => handleYearChange(year)}
-                    >
-                      {year}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="filter-section">
-                <h4 className="filter-heading">Месяц</h4>
-                <div className="filter-options">
-                  {months.map(month => (
-                    <button 
-                      key={month}
-                      className={`filter-button ${selectedMonths.includes(month) ? 'active' : ''}`}
-                      onClick={() => toggleMonth(month)}
-                    >
-                      {month}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <div className="filter-section">
-                <h4 className="filter-heading">Категории</h4>
-                <div className="filter-categories">
-                  {allCategories.map(category => (
-                    <button 
-                      key={category}
-                      className={`filter-category ${selectedCategories.includes(category) ? 'active' : ''}`}
-                      onClick={() => toggleCategory(category)}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-              </div>
-              
-              <button className="reset-filters" onClick={resetFilters}>
-                Сбросить фильтры
-              </button>
-            </div>
-          </div>
-          
-          <div className="trends-page-right">
-            {Object.keys(filteredTrends).length > 0 ? (
-              Object.entries(filteredTrends).map(([monthYear, trends]) => {
-                const [month, year] = monthYear.split(' ');
-                return (
-                  <MonthSection 
-                    key={monthYear}
-                    month={month}
-                    year={year}
-                    trends={trends}
-                  />
-                );
-              })
-            ) : (
-              <div className="no-results">
-                <p>Нет результатов, соответствующих выбранным фильтрам.</p>
-                <button className="reset-filters" onClick={resetFilters}>
-                  Сбросить фильтры
+      
+      <main className="trends-layout">
+        <div className="trends-sidebar">
+          <div className="categories-container">
+            <h2 className="categories-title">фильтры</h2>
+            
+            {/* Фильтр по году */}
+            <div className="filter-section">
+              <h3 className="filter-title">год</h3>
+              <div className="filter-options">
+                <button 
+                  className={`filter-option ${activeYear === 'all' ? 'active' : ''}`}
+                  onClick={() => handleYearFilter('all')}
+                >
+                  all
+                </button>
+                <button 
+                  className={`filter-option ${activeYear === '2025' ? 'active' : ''}`}
+                  onClick={() => handleYearFilter('2025')}
+                >
+                  2025
+                </button>
+                <button 
+                  className={`filter-option ${activeYear === '2024' ? 'active' : ''}`}
+                  onClick={() => handleYearFilter('2024')}
+                >
+                  2024
                 </button>
               </div>
-            )}
+            </div>
+            
+            {/* Фильтр по месяцу */}
+            <div className="filter-section">
+              <h3 className="filter-title">месяц</h3>
+              <div className="filter-options">
+                <button 
+                  className={`filter-option ${activeMonth === 'all' ? 'active' : ''}`}
+                  onClick={() => handleMonthFilter('all')}
+                >
+                  all
+                </button>
+                {months.map(month => (
+                  <button 
+                    key={month.value}
+                    className={`filter-option ${activeMonth === month.value ? 'active' : ''}`}
+                    onClick={() => handleMonthFilter(month.value)}
+                  >
+                    {month.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            
+            {/* Фильтр по категориям */}
+            <div className="filter-section">
+              <h3 className="filter-title">категории</h3>
+              <div className="filter-options">
+                <button 
+                  className={`filter-option ${activeCategory === 'all' ? 'active' : ''}`}
+                  onClick={() => handleCategoryFilter('all')}
+                >
+                  all
+                </button>
+                {categories.map(category => (
+                  <button 
+                    key={category}
+                    className={`filter-option ${activeCategory === category ? 'active' : ''}`}
+                    onClick={() => handleCategoryFilter(category)}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        
+        <div className="trends-content">
+          <h1 className="trends-title">Тренды</h1>
+          
+          {loading ? (
+            <div className="loading-spinner">
+              <div className="spinner"></div>
+              <p>Загрузка трендов...</p>
+            </div>
+          ) : error ? (
+            <div className="error-message">
+              <p>{error}</p>
+            </div>
+          ) : filteredTrends.length === 0 ? (
+            <div className="no-trends-message">
+              <p>Тренды не найдены</p>
+            </div>
+          ) : (
+            <div className="trends-list">
+              {filteredTrends.map(trend => (
+                <Link to={`/trends/${trend._id}`} key={trend._id} className="trend-card">
+                  <div className="trend-card-content">
+                    <div className="trend-meta">
+                      <span className="trend-category">{trend.category}</span>
+                      <span className="trend-date">{formatDate(trend.createdAt)}</span>
+                    </div>
+                    <h2 className="trend-title">{trend.title}</h2>
+                    <p className="trend-description">{trend.description}</p>
+                  </div>
+                  <div className="trend-image">
+                    <img src={trend.image} alt={trend.title} />
+                    {trend.featured && <span className="featured-badge">Популярное</span>}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
+      </main>
+      
       <Footer />
     </div>
   );
